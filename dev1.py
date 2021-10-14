@@ -1,3 +1,1 @@
 print('Matheus')
-
-print('Nicolas')
