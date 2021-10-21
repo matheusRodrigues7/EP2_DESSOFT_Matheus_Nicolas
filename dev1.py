@@ -8,4 +8,5 @@ print('Vamos começar!!!')
 n_jogadores = int(input('Quantos jogadores? (2-4)'))
 
 while n_jogadores > 4 or  n_jogadores < 2:
+    print('Número inválido!')
     n_jogadores = int(input('Quantos jogadores? (2-4)'))
