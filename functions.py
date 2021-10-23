@@ -36,3 +36,22 @@ def soma_pecas(pecas):
     for peca in pecas:
         soma += sum(peca) 
     return soma
+
+# POSIÇÕES POSSÍVEIS DA MÃO
+def posicoes_possiveis(mesa,pecas):
+
+    possiveis = []
+    if len(mesa) == 0:
+        for peca in pecas:
+            indice = pecas.index(peca)
+            possiveis.append(indice)
+        return possiveis
+
+    for peca in pecas:
+        for n in peca:
+            if n in mesa[0] or n in mesa[-1]:
+                indice = pecas.index(peca)
+                if indice not in possiveis:
+                    possiveis.append(indice)
+    
+    return possiveis
