@@ -1,3 +1,17 @@
+# CRIAR PEÇAS
+import random
+def cria_pecas():
+    pecas = []
+    i = 0 
+    while i < 7:
+        j = i
+        while j < 7:
+            pecas.append([i,j])
+            j += 1
+        i += 1
+    random.shuffle(pecas)
+    return pecas
+    
 # INICIANDO O JOGO
 def inicia_jogo(n_jogadores,lista_pecas):
 
@@ -42,35 +56,16 @@ def posicoes_possiveis(mesa,pecas):
 
     possiveis = []
     if len(mesa) == 0:
+        possiveis = [0,1,2,3,4,5,6]
+    else:
         for peca in pecas:
-            indice = pecas.index(peca)
-            possiveis.append(indice)
-        return possiveis
-
-    for peca in pecas:
-        for n in peca:
-            if n in mesa[0] or n in mesa[-1]:
-                indice = pecas.index(peca)
-                if indice not in possiveis:
-                    possiveis.append(indice)
-    
+            for n in peca:
+                if n == mesa[0][0] or n == mesa[-1][1]:
+                    indice = pecas.index(peca)
+                    if indice not in possiveis:
+                        possiveis.append(indice)
+        
     return possiveis
-
-# CRIAR PEÇAS
-
-import random
-def cria_pecas():
-    pecas = []
-    i = 0 
-    while i < 7:
-        j = i
-        while j < 7:
-            pecas.append([i,j])
-            j += 1
-        i += 1
-    random.shuffle(pecas)
-    return pecas
-
 
 # ADICIONA PEÇA A MESA
 
@@ -98,5 +93,5 @@ def adiciona_na_mesa(peca,mesa):
 
     elif peca[1] == mesa[0][0]:
         mesa.insert(0,peca)
-        
+
     return mesa
