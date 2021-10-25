@@ -98,9 +98,5 @@ def adiciona_na_mesa(peca,mesa):
 
     elif peca[1] == mesa[0][0]:
         mesa.insert(0,peca)
-    
-    elif peca[1] == mesa[0][1]:
-        peca.reverse()
-        mesa.append(peca)
-
+        
     return mesa
