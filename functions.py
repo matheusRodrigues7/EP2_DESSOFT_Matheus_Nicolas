@@ -55,3 +55,52 @@ def posicoes_possiveis(mesa,pecas):
                     possiveis.append(indice)
     
     return possiveis
+
+# CRIAR PEÇAS
+
+import random
+def cria_pecas():
+    pecas = []
+    i = 0 
+    while i < 7:
+        j = i
+        while j < 7:
+            pecas.append([i,j])
+            j += 1
+        i += 1
+    random.shuffle(pecas)
+    return pecas
+
+
+# ADICIONA PEÇA A MESA
+
+def adiciona_na_mesa(peca,mesa):
+    if len(mesa) == 0:
+        mesa.append(peca)
+    
+    elif len(mesa) == 1 and mesa[0][0] == mesa[0][1] and mesa[0][1] == peca[0]:
+        peca.reverse()
+        mesa.insert(0,peca)
+    
+    elif len(mesa) == 1 and mesa[0][0] == mesa[0][1] and mesa[0][0] == peca[1]:
+        mesa.insert(0,peca)
+
+    elif peca[0] == mesa[-1][1]:
+        mesa.append(peca)
+    
+    elif peca[0] == mesa [0][0]:
+        peca.reverse()
+        mesa.insert(0,peca)
+    
+    elif peca[1] == mesa[-1][1]:
+        peca.reverse()
+        mesa.append(peca)
+
+    elif peca[1] == mesa[0][0]:
+        mesa.insert(0,peca)
+    
+    elif peca[1] == mesa[0][1]:
+        peca.reverse()
+        mesa.append(peca)
+
+    return mesa
