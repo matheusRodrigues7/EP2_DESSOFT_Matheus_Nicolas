@@ -31,24 +31,39 @@ if len(mesa) == 0:
     print('MESA: \n')
 else:
     print(f'MESA: \n {mesa}')
-quantidade_pecas = len(call['jogadores'][indice_1j])
+
+pecas_jogador = call['jogadores'][indice_1j]
+qtde_pecas = len(pecas_jogador)
 
 # Chamar a função add peças na mesa
 # Chamar a função posições possíveis
 
-possiveis = functions.posicoes_possiveis(mesa,call['jogadores'][indice_1j])
+possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
 
 possiveis1 = []
 for indice in possiveis: 
     possiveis1.append(indice + 1)
 
-print (f'Jogador: {jogador_inicia} com {quantidade_pecas} peça(s)')
+peca = pecas_jogador[possiveis[0]]
 
-peca = int(input('Escolha a peça: '))
+if jogador_inicia == 'Você':
+    print(possiveis1)
+    print(pecas_jogador)
+    escolha_peca = int(input('Escolha a peça: '))
 
-while peca not in possiveis1:
-    print('Posição inválida!')
-    peca = int(input(f'Escolha a peça [{possiveis1}] '))
+    while escolha_peca not in possiveis1:
+        print('Posição inválida!')
+        escolha_peca = int(input(f'Escolha a peça {possiveis1} '))
+
+    peca = pecas_jogador[possiveis[escolha_peca-1]]
+
+pecas_jogador.remove(peca)
+print (f'Jogador: {jogador_inicia} com {qtde_pecas} peça(s)')
+print(f'Colocou: {peca}')
+
+# redefinindo mesa
+mesa = functions.adiciona_na_mesa(peca,mesa)
+print(f'MESA: \n{mesa}')
 
 print(call['monte'])
 print (call['jogadores'])
