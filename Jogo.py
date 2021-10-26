@@ -33,7 +33,6 @@ else:
     print(f'MESA: \n {mesa}')
 quantidade_pecas = len(call['jogadores'][indice_1j])
 
-
 # Chamar a função add peças na mesa
 # Chamar a função posições possíveis
 
