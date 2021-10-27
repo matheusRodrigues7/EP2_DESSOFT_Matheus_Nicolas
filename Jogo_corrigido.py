@@ -97,12 +97,15 @@ while indice_1j <= n_jogadores:
     '''print(f'MESA: \n{mesa}')'''
     if len(pecas_jogador)==0:
         break
+    
+    indice_1j += 1
+    
 vencedor = functions.verifica_ganhador(jogadores)
 print (vencedor)
 if len(monte) == 0 and vencedor == -1:
     soma = functions.soma_pecas(pecas_jogador)
 
-indice_1j += 1
+
 
 
 
