@@ -1,4 +1,4 @@
-import abc
+from time import sleep 
 import functions
 import random
 print('Jogo de Dominó')
@@ -25,38 +25,43 @@ monte = call['monte']
 jogadores = call['jogadores']
 soma = {0:0,1:0,2:0,3:0}
 passe=0
-mesa_anterior=[]
-mesa_posterior=[]
-indice_1j = random.randint(0,n_jogadores-1) #Indice do primeiro jogador.
+
+#mesa_anterior=[]
+#mesa_posterior=[]
+
+indice_1j = random.randint(0,n_jogadores-1) #Sorteando o primeiro jogador
+
 if indice_1j == 0:
     jogador_inicia = 'Você'
 else:
-    jogador_inicia=indice_1j
+    jogador_inicia = indice_1j
 
 while indice_1j <= n_jogadores:
-    
-    if len(mesa_anterior)<len(mesa_posterior):
-        passe=0
+
+    #print(passe,'INICIO')
     if indice_1j == n_jogadores:
         indice_1j = 0
 
     if len(mesa) == 0:
         print('MESA: \n')
     else:
-        print(f'MESA: \n {mesa}')
+        print(f'MESA: \n{mesa}')
 
-    pecas_jogador = call['jogadores'][indice_1j]
-
-    # Chamar a função add peças na mesa
-    # Chamar a função posições possíveis
+    pecas_jogador = jogadores[indice_1j]
 
     possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
 
     nao_tem_peca = True
-    if len(possiveis)==0:
-        if n_jogadores==4:
-            indice_1j+=1
+    if len(possiveis) == 0:
+        if n_jogadores == 4:
+            print(f'{indice_1j} passou')
+            passe += 1
+            print('Passe: ', passe)
+            indice_1j += 1
+            if passe == n_jogadores:
+                break
             continue
+            
         else:
             while nao_tem_peca:
                 if len(possiveis)==0 and len(monte)==0:
@@ -67,15 +72,22 @@ while indice_1j <= n_jogadores:
                         pecas_jogador.append(monte[0])
                         monte.remove(monte[0])
                         possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
-                        print(monte) #Checagem
+                        #print(monte,'CHECAGEM') #Checagem
                 else:
                     nao_tem_peca=False
-            print(pecas_jogador)
+            #print(pecas_jogador)
 
     qtde_pecas = len(pecas_jogador)
 
-    if len(possiveis)>0:
+    if len(possiveis) > 0:
         peca = pecas_jogador[possiveis[0]]
+    '''elif len(possiveis) == 0 and len(monte) == 0:
+        print(f'{indice_1j} passou')
+        passe += 1
+        if passe < 4: 
+            continue
+        else: 
+            break'''
 
     if indice_1j == 0:
         possiveis1 = []
@@ -92,39 +104,54 @@ while indice_1j <= n_jogadores:
             escolha_peca = int(input(f'Escolha a peça {possiveis1} '))
         
         peca = pecas_jogador[escolha_peca-1]
+    
     else:
         print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
-        print(jogadores[indice_1j]) #CHECAGEM.
+        #print(pecas_jogador) #CHECAGEM
 
     print(f'Colocou: {peca}')
     pecas_anteriores= pecas_jogador
     pecas_jogador.remove(peca)
 
     # redefinindo mesa
-    mesa_anterior=mesa
+    mesa_anterior = mesa[:]
     mesa = functions.adiciona_na_mesa(peca,mesa)
-    mesa_posterior=mesa
+    mesa_posterior = mesa[:]
     '''print(f'MESA: \n{mesa}')'''
-    print(len(monte),'Checagem')
-    if len(possiveis)==0 and len(monte)==0:
-        print('passou')
-        passe+=1
-    if len(pecas_jogador)==0:
+    
+    if len(mesa_anterior) < len(mesa_posterior):
+        passe = 0
+        #print(passe,'NÃO PASSOU')
+
+
+    if len(pecas_jogador) == 0:
         for i in range (0,n_jogadores):
-            soma[i]+=functions.soma_pecas(jogadores[i])
+            pontos = functions.soma_pecas(jogadores[i])
+            soma[i] += pontos
         print(soma)
         break
-    if len(pecas_jogador)==0:
-        break
-    
+
+    sleep(2)
+
     indice_1j += 1
-    
+
+if len(monte) == 0 and passe == n_jogadores:
+    for jogador,s in soma.items():
+        if s == min(soma.values()):
+            if jogador == 0:
+                print('Você ganhou parabens!!')
+            else:
+                print(f'Jogador {jogador} ganhou!')
+
 vencedor = functions.verifica_ganhador(jogadores)
-#(soma0<soma1 and soma0<soma2 and soma0<soma3)
-if vencedor == 0 or min(soma.values()):
+
+if vencedor == 0:
     print('Você ganhou parabens!!')
-if len(monte) == 0 and vencedor == -1:
-    soma = functions.soma_pecas(pecas_jogador)
+else:
+    print(f'Jogador {vencedor+1} ganhou!')
+
+#if len(monte) == 0 and vencedor == -1:
+   # soma = functions.soma_pecas(pecas_jogador)
 
 
 
