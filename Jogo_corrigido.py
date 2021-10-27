@@ -1,3 +1,4 @@
+import abc
 import functions
 import random
 print('Jogo de Dominó')
@@ -40,20 +41,39 @@ while indice_1j <= n_jogadores:
         print(f'MESA: \n {mesa}')
 
     pecas_jogador = call['jogadores'][indice_1j]
-    qtde_pecas = len(pecas_jogador)
 
     # Chamar a função add peças na mesa
     # Chamar a função posições possíveis
 
     possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
 
+    nao_tem_peca = True
+    if len(possiveis)==0:
+        if n_jogadores==4:
+            indice_1j+=1
+            continue
+        else:
+            while nao_tem_peca:
+                if len(possiveis)==0:
+                    if len(monte)>0:
+                        print('comprou')
+                        pecas_jogador.append(monte[0])
+                        monte.remove(monte[0])
+                        possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
+                        print(monte) #Checagem
+                else:
+                    nao_tem_peca=False
+            print(pecas_jogador)
+
+    qtde_pecas = len(pecas_jogador)
+
     peca = pecas_jogador[possiveis[0]]
-    
+
     if indice_1j == 0:
         possiveis1 = []
         for indice in possiveis: 
             possiveis1.append(indice + 1)
-
+            
         print (f'Jogador: Você com {qtde_pecas} peça(s)')
         print(pecas_jogador)
         print(possiveis1)
@@ -64,10 +84,10 @@ while indice_1j <= n_jogadores:
             escolha_peca = int(input(f'Escolha a peça {possiveis1} '))
         
         peca = pecas_jogador[escolha_peca-1]
-    
     else:
         print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
-    
+        print(jogadores[indice_1j]) #CHECAGEM.
+
     print(f'Colocou: {peca}')
 
     pecas_jogador.remove(peca)
@@ -75,16 +95,20 @@ while indice_1j <= n_jogadores:
     # redefinindo mesa
     mesa = functions.adiciona_na_mesa(peca,mesa)
     '''print(f'MESA: \n{mesa}')'''
+    if len(pecas_jogador)==0:
+        break
+vencedor = functions.verifica_ganhador(jogadores)
+print (vencedor)
+if len(monte) == 0 and vencedor == -1:
+    soma = functions.soma_pecas(pecas_jogador)
 
-    vencedor = functions.verifica_ganhador(jogadores)
-    if len(monte) == 0 and vencedor == -1:
-        soma = functions.soma_pecas(pecas_jogador)
+indice_1j += 1
 
-    indice_1j += 1
 
-    '''print(call['monte'])
-    print (call['jogadores'])'''
 
 
 # FUNCIONALIDADE DE COMPRAR DO MONTE 
 # CHAMAR A FUNÇÃO VENCEDOR
+
+
+
