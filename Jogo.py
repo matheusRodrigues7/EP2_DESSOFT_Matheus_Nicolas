@@ -20,14 +20,14 @@ while n_jogadores > 4 or n_jogadores < 2:
 pecas = functions.cria_pecas()
 call = functions.inicia_jogo(n_jogadores,pecas)
 mesa = call['mesa']
+monte = call['monte']
+jogadores = call['jogadores']
 
 indice_1j = random.randint(0,n_jogadores-1) #Indice do primeiro jogador.
 if indice_1j == 0:
     jogador_inicia = 'Você'
 else:
     jogador_inicia=indice_1j
-
-
 
 while indice_1j <= n_jogadores:
     
@@ -76,7 +76,18 @@ while indice_1j <= n_jogadores:
     mesa = functions.adiciona_na_mesa(peca,mesa)
     '''print(f'MESA: \n{mesa}')'''
 
+    vencedor = functions.verifica_ganhador(jogadores)
+    if len(monte) == 0 and vencedor == -1:
+        soma = functions.soma_pecas(pecas_jogador)
+
     indice_1j += 1
 
     '''print(call['monte'])
     print (call['jogadores'])'''
+
+
+# FUNCIONALIDADE DE COMPRAR DO MONTE 
+# CHAMAR A FUNÇÃO VENCEDOR
+
+
+
