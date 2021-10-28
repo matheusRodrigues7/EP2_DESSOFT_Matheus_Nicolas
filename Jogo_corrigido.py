@@ -45,16 +45,16 @@ while indice_1j <= n_jogadores:
     if len(mesa) == 0:
         print('MESA: \n')
     else:
-        print(f'MESA: \n{mesa}')
+        print(f'\n MESA: \n{mesa}\n')
 
     pecas_jogador = jogadores[indice_1j]
 
     possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
 
     nao_tem_peca = True
-    if len(possiveis) == 0:
+    '''if len(possiveis) == 0:
         if n_jogadores == 4:
-            print(f'{indice_1j} passou')
+            print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
             passe += 1
             print('Passe: ', passe)
             indice_1j += 1
@@ -62,21 +62,38 @@ while indice_1j <= n_jogadores:
                 break
             continue
             
-        else:
-            while nao_tem_peca:
-                if len(possiveis)==0 and len(monte)==0:
-                    nao_tem_peca=False
-                elif len(possiveis)==0:
-                    if len(monte)>0:
-                        print('comprou')
-                        pecas_jogador.append(monte[0])
-                        monte.remove(monte[0])
-                        possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
-                        #print(monte,'CHECAGEM') #Checagem
+        else:'''
+    while nao_tem_peca:
+        if len(possiveis) == 0 and len(monte) == 0:
+            break
+            
+        elif len(possiveis) == 0:
+            if len(monte)>0:
+                qtde_pecas = len(pecas_jogador)
+                if indice_1j == 0:
+                    print(f'Você com {qtde_pecas} peça(s)')
                 else:
-                    nao_tem_peca=False
-            #print(pecas_jogador)
+                    print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
+                    
+                print('Não tem peças possíveis. PEGANDO DO MONTE!')
+                #print(f'MESA: \n{mesa}')
+                pecas_jogador.append(monte[0])
+                monte.remove(monte[0])
+                possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
+                #print(monte,'CHECAGEM') #Checagem
+        else:
+            nao_tem_peca = False
+        #print(pecas_jogador)
 
+    if len(possiveis) == 0 and len(monte) == 0:
+        print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
+        passe += 1
+        print('Passe: ', passe)
+        indice_1j += 1
+        if passe == n_jogadores:
+            break
+        continue
+    
     qtde_pecas = len(pecas_jogador)
 
     if len(possiveis) > 0:
