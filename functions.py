@@ -95,3 +95,16 @@ def adiciona_na_mesa(peca,mesa):
         mesa.insert(0,peca)
 
     return mesa
+
+def print_pecas(pecas):
+    s= ''
+    for p in pecas:
+        s += '[' + f'{p[0]}' + '|' + f'{p[1]}' + ']'
+        s += ' '
+    return s
+
+def print_mesa(mesa):
+    s= ''
+    for p in mesa:
+        s += '[' + f'{p[0]}' + '|' + f'{p[1]}' + ']'
+    return s
