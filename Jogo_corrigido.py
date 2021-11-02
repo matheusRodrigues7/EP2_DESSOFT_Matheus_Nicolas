@@ -42,10 +42,7 @@ while continuar == 'S':
         if indice_1j == n_jogadores:
             indice_1j = 0
 
-        if len(mesa) == 0:
-            print('MESA: \n')
-        else:
-            print(f'\n MESA: \n{functions.print_mesa(mesa)}\n')
+        print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
 
         pecas_jogador = jogadores[indice_1j]
 
