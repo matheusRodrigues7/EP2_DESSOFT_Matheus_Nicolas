@@ -96,6 +96,10 @@ def adiciona_na_mesa(peca,mesa):
 
     return mesa
 
+def print_peca(peca):
+    s = '[' + f'{peca[0]}' + '|' + f'{peca[1]}' + ']'
+    return s
+
 def print_pecas(pecas):
     s= ''
     for p in pecas:
@@ -108,3 +112,12 @@ def print_mesa(mesa):
     for p in mesa:
         s += '[' + f'{p[0]}' + '|' + f'{p[1]}' + ']'
     return s
+
+def cria_dic_soma(n_jogadores):
+    soma = {}
+    for i in range(n_jogadores):
+        soma[i] = 0
+    return soma
+        
+        
+

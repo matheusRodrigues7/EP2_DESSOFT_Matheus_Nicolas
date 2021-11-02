@@ -2,7 +2,6 @@ from time import sleep
 import functions
 import random
 print('Jogo de Dominó')
-continuar= 'S'
 print('='*30)
 print('    Por Matheus e Nicolas     ')
 print('='*30)
@@ -11,10 +10,11 @@ print('=> Design de Software')
 
 print('Bem-vindo(a) ao jogo de Dominó! O objetivo desse jogo é ficar sem peças na sua mão antes dos outros jogadores.')
 print('Vamos começar!!!')
+continuar= 'S'
 while continuar == 'S':
     n_jogadores = int(input('Quantos jogadores? (2-4) '))
 
-    while n_jogadores > 4 or n_jogadores < 2:
+    while n_jogadores < 2 or n_jogadores > 4:
         print('Número inválido!')
         n_jogadores = int(input('Quantos jogadores? (2-4)'))
 
@@ -23,7 +23,7 @@ while continuar == 'S':
     mesa = call['mesa']
     monte = call['monte']
     jogadores = call['jogadores']
-    soma = {0:0,1:0,2:0,3:0}
+    soma = functions.cria_dic_soma(n_jogadores)
     passe=0
 
     #mesa_anterior=[]
@@ -71,7 +71,7 @@ while continuar == 'S':
                 if len(monte)>0:
                     qtde_pecas = len(pecas_jogador)
                     if indice_1j == 0:
-                        print(f'Você com {qtde_pecas} peça(s)')
+                        print(f'Jogador: Você com {qtde_pecas} peça(s)')
                     else:
                         print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
                         
@@ -84,15 +84,6 @@ while continuar == 'S':
             else:
                 nao_tem_peca = False
             #print(pecas_jogador)
-
-        if len(possiveis) == 0 and len(monte) == 0:
-            print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
-            passe += 4
-            print('Passe: ', passe)
-            indice_1j += 1
-            if passe == n_jogadores:
-                break
-            continue
         
         qtde_pecas = len(pecas_jogador)
 
@@ -113,20 +104,30 @@ while continuar == 'S':
                 
             print (f'Jogador: Você com {qtde_pecas} peça(s)')
             print(functions.print_pecas(pecas_jogador))
-            print(possiveis1)
-            escolha_peca = int(input('Escolha a peça: '))
+            if len(possiveis) > 0:
+                print(f'Peças possíveis: {possiveis1}')
+                escolha_peca = int(input('Escolha a peça: '))
 
-            while escolha_peca not in possiveis1:
-                print('Posição inválida!')
-                escolha_peca = int(input(f'Escolha a peça {possiveis1} '))
-            
-            peca = pecas_jogador[escolha_peca-1]
+                while escolha_peca not in possiveis1:
+                    print('Posição inválida!')
+                    escolha_peca = int(input(f'Escolha a peça {possiveis1} '))
+                
+                peca = pecas_jogador[escolha_peca-1]
         
         else:
             print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
-            #print(pecas_jogador) #CHECAGEM
+        
+        # se o jogador n tiver peças e o monte estiver vazio
+        if len(possiveis) == 0 and len(monte) == 0:
+            print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
+            passe += 1
+            print('Passe: ', passe)
+            indice_1j += 1
+            if passe == n_jogadores:
+                break
+            continue
 
-        print(f'Colocou: {peca}')
+        print(f'Colocou: {functions.print_peca(peca)}')
         pecas_anteriores= pecas_jogador
         pecas_jogador.remove(peca)
 
@@ -140,38 +141,23 @@ while continuar == 'S':
             passe = 0
             #print(passe,'NÃO PASSOU')
 
-
         if len(pecas_jogador) == 0:
-            for i in range (0,n_jogadores):
-                pontos = functions.soma_pecas(jogadores[i])
-                soma[i] += pontos
-            print(soma)
             break
-
-        
 
         indice_1j += 1
 
-    if len(monte) == 0 and passe == n_jogadores:
-        if soma[0]==min(soma.values()):
-            print('Você ganhou parabens!!')
-        if soma[1]==min(soma.values()):
-            print('Jogador 2 parabens!!')
-        if soma[2]==min(soma.values()):
-            print('Jogador 3 parabens!!')
-        if soma[3]==min(soma.values()):
-            print('Jogador 4 parabens!!')
+    # somando os pontos de cada jogador
+    for i in range (n_jogadores):
+        pontos = functions.soma_pecas(jogadores[i])
+        soma[i] += pontos
+    print(soma)
 
-      
-        """
-        for jogador,s in soma.items():
-            if s == min(soma.values()):
-                if jogador == 0:
-                    print('Você ganhou parabens!!')
-                else:
-                    print(f'Jogador {jogador} ganhou!')
-"""
     vencedor = functions.verifica_ganhador(jogadores)
+    
+    if len(monte) == 0 and passe == n_jogadores:
+        for i in range(n_jogadores):
+            if soma[i]==min(soma.values()):
+                vencedor = i
 
     if vencedor == 0:
         print('Você ganhou parabens!!')
@@ -179,13 +165,7 @@ while continuar == 'S':
         print(f'Jogador {vencedor+1} ganhou!')
 
     continuar = input(f'Quer jogar novamente?? S/N')
-    #if len(monte) == 0 and vencedor == -1:
-    # soma = functions.soma_pecas(pecas_jogador)
 
-
-
-    # FUNCIONALIDADE DE COMPRAR DO MONTE 
-    # CHAMAR A FUNÇÃO VENCEDOR
 
 
 
