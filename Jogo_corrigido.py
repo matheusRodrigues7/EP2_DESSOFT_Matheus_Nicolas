@@ -11,7 +11,7 @@ print('=> Design de Software')
 print('Bem-vindo(a) ao jogo de Dominó! O objetivo desse jogo é ficar sem peças na sua mão antes dos outros jogadores.')
 print('Vamos começar!!!')
 continuar= 'S'
-while continuar == 'S':
+while continuar == 'S' or continuar == 's':
     n_jogadores = int(input('Quantos jogadores? (2-4) '))
 
     while n_jogadores < 2 or n_jogadores > 4:
@@ -31,10 +31,10 @@ while continuar == 'S':
 
     indice_1j = random.randint(0,n_jogadores-1) #Sorteando o primeiro jogador
 
-    if indice_1j == 0:
+    '''if indice_1j == 0:
         jogador_inicia = 'Você'
     else:
-        jogador_inicia = indice_1j
+        jogador_inicia = indice_1j'''
 
     while indice_1j <= n_jogadores:
 
@@ -73,6 +73,7 @@ while continuar == 'S':
                         print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
                         
                     print('Não tem peças possíveis. PEGANDO DO MONTE!')
+                    print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
                     #print(f'MESA: \n{mesa}')
                     pecas_jogador.append(monte[0])
                     monte.remove(monte[0])
@@ -147,21 +148,28 @@ while continuar == 'S':
     for i in range (n_jogadores):
         pontos = functions.soma_pecas(jogadores[i])
         soma[i] += pontos
-    print(soma)
+    #print(soma)
 
     vencedor = functions.verifica_ganhador(jogadores)
     
     if len(monte) == 0 and passe == n_jogadores:
+        print('TERMINOU SEM BATIDA! \nContabilizando peças...')
         for i in range(n_jogadores):
             if soma[i]==min(soma.values()):
                 vencedor = i
 
-    if vencedor == 0:
-        print('Você ganhou parabens!!')
-    else:
-        print(f'Jogador {vencedor+1} ganhou!')
+    for jogador,pontos in soma.items():
+        if jogador == 0:
+            print(f'\nJogador: Você com {len(jogadores[jogador])} peças(s) e {pontos} pontos')
+        else:
+            print(f'Jogador: {jogador+1} com {len(jogadores[jogador])} peças(s) e {pontos} pontos')
 
-    continuar = input(f'Quer jogar novamente?? S/N')
+    if vencedor == 0:
+        print('\nVocê ganhou, parabens!')
+    else:
+        print(f'\nJogador {vencedor+1} ganhou!')
+
+    continuar = input('\nQuer jogar novamente? [S/N] ')
 
 
 

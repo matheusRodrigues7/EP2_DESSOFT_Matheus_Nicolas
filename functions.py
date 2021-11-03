@@ -67,30 +67,25 @@ def posicoes_possiveis(mesa,pecas):
         
     return possiveis
 
-# ADICIONA PEÇA A MESA
+# ADICIONA PEÇA NA MESA
 
 def adiciona_na_mesa(peca,mesa):
     if len(mesa) == 0:
         mesa.append(peca)
     
-    elif len(mesa) == 1 and mesa[0][0] == mesa[0][1] and mesa[0][1] == peca[0]:
-        peca.reverse()
-        mesa.insert(0,peca)
-    
-    elif len(mesa) == 1 and mesa[0][0] == mesa[0][1] and mesa[0][0] == peca[1]:
-        mesa.insert(0,peca)
-
     elif peca[0] == mesa[-1][1]:
         mesa.append(peca)
     
-    elif peca[0] == mesa [0][0]:
-        peca.reverse()
-        mesa.insert(0,peca)
-    
-    elif peca[1] == mesa[-1][1]:
-        peca.reverse()
-        mesa.append(peca)
+    # peça a esquerda
+    elif peca[0] == mesa[0][0]:
+        # inverte a peça 
+        #peca.reverse()
+        mesa.insert(0,[peca[1],peca[0]])
 
+    elif peca[1] == mesa[-1][1]:
+        #peca.reverse()
+        mesa.append([peca[1],peca[0]])
+    
     elif peca[1] == mesa[0][0]:
         mesa.insert(0,peca)
 
