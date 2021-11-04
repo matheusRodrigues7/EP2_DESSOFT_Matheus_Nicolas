@@ -32,16 +32,16 @@ while continuar == 'S' or continuar == 's':
     soma = functions.cria_dic_soma(n_jogadores)
     passe=0
 
-    indice_1j = random.randint(0,n_jogadores-1) #Sorteando o primeiro jogador
+    jogador = random.randint(0,n_jogadores-1) #Sorteando o primeiro jogador
 
-    while indice_1j <= n_jogadores:
+    while jogador <= n_jogadores:
         Tratamento_possiveis = True
-        if indice_1j == n_jogadores:
-            indice_1j = 0
+        if jogador == n_jogadores:
+            jogador = 0
 
         print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
 
-        pecas_jogador = jogadores[indice_1j]
+        pecas_jogador = jogadores[jogador]
 
         possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
 
@@ -53,12 +53,12 @@ while continuar == 'S' or continuar == 's':
             elif len(possiveis) == 0:
                 if len(monte)>0:
                     qtde_pecas = len(pecas_jogador)
-                    if indice_1j == 0:
+                    if jogador == 0:
                         print(f'Jogador: Você com {qtde_pecas} peça(s)')
                         print('Não tem peças possíveis. PEGANDO DO MONTE!')
                         input('[pressione ENTER]')
                     else:
-                        print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
+                        print(f'Jogador: {jogador+1} com {qtde_pecas} peça(s)')
                         print('Não tem peças possíveis. PEGANDO DO MONTE!')
 
                     print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
@@ -74,7 +74,7 @@ while continuar == 'S' or continuar == 's':
         if len(possiveis) > 0:
             peca = pecas_jogador[possiveis[0]]
 
-        if indice_1j == 0:
+        if jogador == 0:
             possiveis1 = []
             for indice in possiveis: 
                 possiveis1.append(indice + 1)
@@ -98,16 +98,16 @@ while continuar == 'S' or continuar == 's':
                 peca = pecas_jogador[escolha_peca-1]
         
         else:
-            print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
+            print(f'Jogador: {jogador+1} com {qtde_pecas} peça(s)')
         
         # se o jogador n tiver peças e o monte estiver vazio
         if len(possiveis) == 0 and len(monte) == 0:
             print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
-            if indice_1j == 0: 
+            if jogador == 0: 
                 input('[pressione ENTER]')
             passe += 1
             print('Passe: ', passe)
-            indice_1j += 1
+            jogador += 1
             if passe == n_jogadores:
                 break
             continue
@@ -127,7 +127,7 @@ while continuar == 'S' or continuar == 's':
         if len(pecas_jogador) == 0:
             break
 
-        indice_1j += 1
+        jogador += 1
 
     # somando os pontos de cada jogador
     for i in range (n_jogadores):
