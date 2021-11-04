@@ -11,9 +11,9 @@ print('=> Design de Software')
 print('Bem-vindo(a) ao jogo de Dominó! O objetivo desse jogo é ficar sem peças na sua mão antes dos outros jogadores.')
 print('Vamos começar!!!')
 continuar= 'S'
-Tratamento = True
-Tratamento_possiveis = True
 while continuar == 'S' or continuar == 's':
+    Tratamento = True
+    Tratamento_possiveis = True
     while Tratamento or (n_jogadores < 2 or n_jogadores > 4):
         n_jogadores=2
         try:
