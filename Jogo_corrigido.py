@@ -13,7 +13,6 @@ print('Vamos começar!!!')
 continuar= 'S'
 while continuar == 'S' or continuar == 's':
     Tratamento = True
-    Tratamento_possiveis = True
     while Tratamento or (n_jogadores < 2 or n_jogadores > 4):
         n_jogadores=2
         try:
@@ -36,7 +35,7 @@ while continuar == 'S' or continuar == 's':
     indice_1j = random.randint(0,n_jogadores-1) #Sorteando o primeiro jogador
 
     while indice_1j <= n_jogadores:
-
+        Tratamento_possiveis = True
         if indice_1j == n_jogadores:
             indice_1j = 0
 
