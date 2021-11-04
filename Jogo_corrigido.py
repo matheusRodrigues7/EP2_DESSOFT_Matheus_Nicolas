@@ -90,10 +90,11 @@ while continuar == 'S' or continuar == 's':
                         escolha_peca = int(input('Escolha a peça: '))
                         Tratamento_possiveis = False
                     except ValueError:
-                        print('Posição inválida!')
+                        print(f'Posição inválida! Estas são as possiveis:{possiveis1}')
                         Tratamento_possiveis=True
                     if escolha_peca not in possiveis1:
-                        print('Posição inválida!')
+                        print(f'Posição inválida! Estas são as possiveis:{possiveis1}')
+
                 peca = pecas_jogador[escolha_peca-1]
         
         else:
