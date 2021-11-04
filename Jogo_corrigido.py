@@ -78,12 +78,12 @@ while continuar == 'S' or continuar == 's':
             possiveis1 = []
             for indice in possiveis: 
                 possiveis1.append(indice + 1)
-                
+            
             print (f'Jogador: Você com {qtde_pecas} peça(s)')
             print(functions.print_pecas(pecas_jogador))
-            
+            print(f'Peças possíveis: {possiveis1}')
+
             if len(possiveis) > 0:
-                print(f'Peças possíveis: {possiveis1}')
                 while Tratamento_possiveis or escolha_peca not in possiveis1:
                     escolha_peca = possiveis1[0]
                     try:
