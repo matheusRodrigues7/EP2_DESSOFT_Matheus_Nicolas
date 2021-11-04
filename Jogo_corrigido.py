@@ -94,7 +94,6 @@ while continuar == 'S' or continuar == 's':
                         Tratamento_possiveis=True
                     if escolha_peca not in possiveis1:
                         print('Posição inválida!')
-                    print(f'Peças possíveis: {possiveis1}')
                 peca = pecas_jogador[escolha_peca-1]
         
         else:
@@ -126,7 +125,7 @@ while continuar == 'S' or continuar == 's':
 
         if len(pecas_jogador) == 0:
             break
-
+        sleep(2)
         jogador += 1
 
     # somando os pontos de cada jogador
