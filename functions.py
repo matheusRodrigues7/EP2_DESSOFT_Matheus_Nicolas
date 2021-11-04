@@ -59,10 +59,15 @@ def posicoes_possiveis(mesa,pecas):
         possiveis = [0,1,2,3,4,5,6]
     else:
         for peca in pecas:
+
             for n in peca:
+                
                 if n == mesa[0][0] or n == mesa[-1][1]:
+
                     indice = pecas.index(peca)
+
                     if indice not in possiveis:
+
                         possiveis.append(indice)
         
     return possiveis
