@@ -56,10 +56,12 @@ while continuar == 'S' or continuar == 's':
                     qtde_pecas = len(pecas_jogador)
                     if indice_1j == 0:
                         print(f'Jogador: Você com {qtde_pecas} peça(s)')
+                        print('Não tem peças possíveis. PEGANDO DO MONTE!')
+                        input('[pressione ENTER]')
                     else:
                         print(f'Jogador: {indice_1j+1} com {qtde_pecas} peça(s)')
-                        
-                    print('Não tem peças possíveis. PEGANDO DO MONTE!')
+                        print('Não tem peças possíveis. PEGANDO DO MONTE!')
+
                     print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
 
                     pecas_jogador.append(monte[0])
@@ -102,6 +104,8 @@ while continuar == 'S' or continuar == 's':
         # se o jogador n tiver peças e o monte estiver vazio
         if len(possiveis) == 0 and len(monte) == 0:
             print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
+            if indice_1j == 0: 
+                input('[pressione ENTER]')
             passe += 1
             print('Passe: ', passe)
             indice_1j += 1
