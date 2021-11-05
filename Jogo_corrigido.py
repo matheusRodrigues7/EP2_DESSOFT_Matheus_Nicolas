@@ -55,6 +55,7 @@ while continuar == 'S' or continuar == 's':
                     qtde_pecas = len(pecas_jogador)
                     if jogador == 0:
                         print(f'Jogador: Você com {qtde_pecas} peça(s)')
+                        print(functions.print_pecas(pecas_jogador))
                         print('Não tem peças possíveis. PEGANDO DO MONTE!')
                         input('[pressione ENTER]')
                     else:
@@ -81,9 +82,9 @@ while continuar == 'S' or continuar == 's':
             
             print (f'Jogador: Você com {qtde_pecas} peça(s)')
             print(functions.print_pecas(pecas_jogador))
-            print(f'Peças possíveis: {possiveis1}')
 
-            if len(possiveis) > 0:
+            if len(possiveis1) > 0:
+                print(f'Peças possíveis: {possiveis1}')
                 while Tratamento_possiveis or escolha_peca not in possiveis1:
                     escolha_peca = possiveis1[0]
                     try:
@@ -138,9 +139,12 @@ while continuar == 'S' or continuar == 's':
     
     if len(monte) == 0 and passe == n_jogadores:
         print('TERMINOU SEM BATIDA! \nContabilizando peças...')
+        sleep(2)
         for i in range(n_jogadores):
             if soma[i]==min(soma.values()):
                 vencedor = i
+
+    sleep(2)
 
     for jogador,pontos in soma.items():
         if jogador == 0:
@@ -148,10 +152,14 @@ while continuar == 'S' or continuar == 's':
         else:
             print(f'Jogador: {jogador+1} com {len(jogadores[jogador])} peças(s) e {pontos} pontos')
 
+    sleep(2)
+
     if vencedor == 0:
         print('\nVocê ganhou, parabens!')
     else:
         print(f'\nJogador {vencedor+1} ganhou!')
+
+    sleep(1)
 
     continuar = input('\nQuer jogar novamente? [S/N] ')
 
