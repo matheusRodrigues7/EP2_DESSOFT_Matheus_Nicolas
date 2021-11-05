@@ -56,6 +56,7 @@ while continuar == 'S' or continuar == 's':
                     if jogador == 0:
                         print(f'Jogador: Você com {qtde_pecas} peça(s)')
                         print('Não tem peças possíveis. PEGANDO DO MONTE!')
+                        print(f'Peças: {functions.print_pecas(pecas_jogador)}')
                         input('[pressione ENTER]')
                     else:
                         print(f'Jogador: {jogador+1} com {qtde_pecas} peça(s)')
@@ -103,6 +104,7 @@ while continuar == 'S' or continuar == 's':
         # se o jogador n tiver peças e o monte estiver vazio
         if len(possiveis) == 0 and len(monte) == 0:
             print('Não tem peças possíveis. MONTE VAZIO - PULANDO A VEZ!')
+            print(f'Peças: {functions.print_pecas(pecas_jogador)}')
             if jogador == 0: 
                 input('[pressione ENTER]')
             passe += 1
