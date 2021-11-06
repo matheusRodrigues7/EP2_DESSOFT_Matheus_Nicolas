@@ -177,20 +177,6 @@ while continuar == 'S' or continuar == 's':
     else: # se um bater
         print(f'\nVENCEDOR(ES): [{vencedor}]')
 
-    '''if len(vencedores) > 1:
-        print(f'Vencedores:')
-        for v in vencedores:
-            if v == 0:
-                print('Você')
-            else:
-                print(v+1)
-
-    elif vencedor == 0:
-        print('\nVocê ganhou, parabens!')
-
-    else:
-        print(f'\nJogador {vencedor+1} ganhou!')'''
-
     sleep(1)
 
     continuar = input('\nQuer jogar novamente? [S/N] ')
