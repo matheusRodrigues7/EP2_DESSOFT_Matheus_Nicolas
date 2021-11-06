@@ -1,5 +1,5 @@
 from time import sleep 
-import functions
+from functions import *
 import random
 print('Jogo de Dominó')
 print('='*30)
@@ -24,12 +24,12 @@ while continuar == 'S' or continuar == 's':
         if n_jogadores < 2 or n_jogadores > 4:
             print('Digito inválido')
 
-    pecas = functions.cria_pecas()
-    call = functions.inicia_jogo(n_jogadores,pecas)
+    pecas = cria_pecas()
+    call = inicia_jogo(n_jogadores,pecas)
     mesa = call['mesa']
     monte = call['monte']
     jogadores = call['jogadores']
-    soma = functions.cria_dic_soma(n_jogadores)
+    soma = cria_dic_soma(n_jogadores)
     passe=0
 
     jogador = random.randint(0,n_jogadores-1) #Sorteando o primeiro jogador
@@ -39,11 +39,11 @@ while continuar == 'S' or continuar == 's':
         if jogador == n_jogadores:
             jogador = 0
 
-        print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
+        print(f'\nMESA: \n{print_mesa(mesa)}\n')
 
         pecas_jogador = jogadores[jogador]
 
-        possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
+        possiveis = posicoes_possiveis(mesa,pecas_jogador)
 
         nao_tem_peca = True
         while nao_tem_peca:
@@ -55,18 +55,18 @@ while continuar == 'S' or continuar == 's':
                     qtde_pecas = len(pecas_jogador)
                     if jogador == 0:
                         print(f'Jogador: Você com {qtde_pecas} peça(s)')
-                        print(functions.print_pecas(pecas_jogador))
+                        print(print_pecas(pecas_jogador))
                         print('Não tem peças possíveis. PEGANDO DO MONTE!')
                         input('[pressione ENTER]')
                     else:
                         print(f'Jogador: {jogador+1} com {qtde_pecas} peça(s)')
                         print('Não tem peças possíveis. PEGANDO DO MONTE!')
 
-                    print(f'\nMESA: \n{functions.print_mesa(mesa)}\n')
+                    print(f'\nMESA: \n{print_mesa(mesa)}\n')
 
                     pecas_jogador.append(monte[0])
                     monte.remove(monte[0])
-                    possiveis = functions.posicoes_possiveis(mesa,pecas_jogador)
+                    possiveis = posicoes_possiveis(mesa,pecas_jogador)
             else:
                 nao_tem_peca = False
         
@@ -81,7 +81,7 @@ while continuar == 'S' or continuar == 's':
                 possiveis1.append(indice + 1)
             
             print (f'Jogador: Você com {qtde_pecas} peça(s)')
-            print(functions.print_pecas(pecas_jogador))
+            print(print_pecas(pecas_jogador))
 
             if len(possiveis1) > 0:
                 print(f'Peças possíveis: {possiveis1}')
@@ -107,19 +107,19 @@ while continuar == 'S' or continuar == 's':
             if jogador == 0: 
                 input('[pressione ENTER]')
             passe += 1
-            print('Passe: ', passe)
+            #print('Passe: ', passe)
             jogador += 1
             if passe == n_jogadores:
                 break
             continue
 
-        print(f'Colocou: {functions.print_peca(peca)}')
+        print(f'Colocou: {print_peca(peca)}')
         pecas_anteriores= pecas_jogador
         pecas_jogador.remove(peca)
 
         # redefinindo mesa
         mesa_anterior = mesa[:]
-        mesa = functions.adiciona_na_mesa(peca,mesa)
+        mesa = adiciona_na_mesa(peca,mesa)
         mesa_posterior = mesa[:]
         
         if len(mesa_anterior) < len(mesa_posterior):
@@ -132,13 +132,13 @@ while continuar == 'S' or continuar == 's':
 
     # somando os pontos de cada jogador
     for i in range (n_jogadores):
-        pontos = functions.soma_pecas(jogadores[i])
+        pontos = soma_pecas(jogadores[i])
         soma[i] += pontos
 
-    vencedor = functions.verifica_ganhador(jogadores)
+    vencedor = verifica_ganhador(jogadores)
     
     if len(monte) == 0 and passe == n_jogadores:
-        print('TERMINOU SEM BATIDA! \nContabilizando peças...')
+        print('\nTERMINOU SEM BATIDA! \nContabilizando peças...')
         sleep(2)
         for i in range(n_jogadores):
             if soma[i]==min(soma.values()):
