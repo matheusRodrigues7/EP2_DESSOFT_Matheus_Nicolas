@@ -73,7 +73,6 @@ def posicoes_possiveis(mesa,pecas):
     return possiveis
 
 # ADICIONA PEÇA NA MESA
-
 def adiciona_na_mesa(peca,mesa):
     if len(mesa) == 0:
         mesa.append(peca)
@@ -81,14 +80,10 @@ def adiciona_na_mesa(peca,mesa):
     elif peca[0] == mesa[-1][1]:
         mesa.append(peca)
     
-    # peça a esquerda
     elif peca[0] == mesa[0][0]:
-        # inverte a peça 
-        #peca.reverse()
         mesa.insert(0,[peca[1],peca[0]])
 
     elif peca[1] == mesa[-1][1]:
-        #peca.reverse()
         mesa.append([peca[1],peca[0]])
     
     elif peca[1] == mesa[0][0]:
@@ -96,114 +91,55 @@ def adiciona_na_mesa(peca,mesa):
 
     return mesa
 
-def print_peca(p):
-    if p[0]==0:
-        cor = f'\033[0;90m{p[0]}\033[m'
-    if p[1]==0:
-        cor2 = f'\033[0;90m{p[1]}\033[m'
-    if p[0]==1:
-        cor = f'\033[0;31m{p[0]}\033[m'
-    if p[1]==1:
-        cor2 = f'\033[0;31m{p[1]}\033[m'
-    if p[0]==2:
-        cor = f'\033[0;32m{p[0]}\033[m'
-    if p[1]==2:
-        cor2 = f'\033[0;32m{p[1]}\033[m'
-    if p[0]==3:
-        cor = f'\033[0;33m{p[0]}\033[m'
-    if p[1]==3:
-        cor2 = f'\033[0;33m{p[1]}\033[m'
-    if p[0]==4:
-        cor = f'\033[0;91m{p[0]}\033[m'
-    if p[1]==4:
-        cor2 = f'\033[0;91m{p[1]}\033[m'
-    if p[0]==5:
-        cor = f'\033[0;35m{p[0]}\033[m'
-    if p[1]==5:
-        cor2 = f'\033[0;35m{p[1]}\033[m'
-    if p[0]==6:
-        cor = f'\033[0;36m{p[0]}\033[m'
-    if p[1]==6:
-        cor2 = f'\033[0;36m{p[1]}\033[m'
-            
-    s = '[' + f'{cor}' + '|' + f'{cor2}' + ']'
-    return s
-
-def print_pecas(pecas):
-    s= ''
-    for p in pecas:
-        if p[0]==0:
-            cor = f'\033[0;90m{p[0]}\033[m'
-        if p[1]==0:
-            cor2 = f'\033[0;90m{p[1]}\033[m'
-        if p[0]==1:
-            cor = f'\033[0;31m{p[0]}\033[m'
-        if p[1]==1:
-            cor2 = f'\033[0;31m{p[1]}\033[m'
-        if p[0]==2:
-            cor = f'\033[0;32m{p[0]}\033[m'
-        if p[1]==2:
-            cor2 = f'\033[0;32m{p[1]}\033[m'
-        if p[0]==3:
-            cor = f'\033[0;33m{p[0]}\033[m'
-        if p[1]==3:
-            cor2 = f'\033[0;33m{p[1]}\033[m'
-        if p[0]==4:
-            cor = f'\033[0;91m{p[0]}\033[m'
-        if p[1]==4:
-            cor2 = f'\033[0;91m{p[1]}\033[m'
-        if p[0]==5:
-            cor = f'\033[0;35m{p[0]}\033[m'
-        if p[1]==5:
-            cor2 = f'\033[0;35m{p[1]}\033[m'
-        if p[0]==6:
-            cor = f'\033[0;36m{p[0]}\033[m'
-        if p[1]==6:
-            cor2 = f'\033[0;36m{p[1]}\033[m'
-        s += '[' + f'{cor}' + '|' + f'{cor2}' + ']'
-        s += ' '
-    return s
-
-def print_mesa(mesa):
-    s = ''
-    cor = ''
-    cor2 = ''
-    for p in mesa:
-        if p[0]==0:
-            cor = f'\033[0;90m{p[0]}\033[m'
-        if p[1]==0:
-            cor2 = f'\033[0;90m{p[1]}\033[m'
-        if p[0]==1:
-            cor = f'\033[0;31m{p[0]}\033[m'
-        if p[1]==1:
-            cor2 = f'\033[0;31m{p[1]}\033[m'
-        if p[0]==2:
-            cor = f'\033[0;32m{p[0]}\033[m'
-        if p[1]==2:
-            cor2 = f'\033[0;32m{p[1]}\033[m'
-        if p[0]==3:
-            cor = f'\033[0;33m{p[0]}\033[m'
-        if p[1]==3:
-            cor2 = f'\033[0;33m{p[1]}\033[m'
-        if p[0]==4:
-            cor = f'\033[0;91m{p[0]}\033[m'
-        if p[1]==4:
-            cor2 = f'\033[0;91m{p[1]}\033[m'
-        if p[0]==5:
-            cor = f'\033[0;35m{p[0]}\033[m'
-        if p[1]==5:
-            cor2 = f'\033[0;35m{p[1]}\033[m'
-        if p[0]==6:
-            cor = f'\033[0;36m{p[0]}\033[m'
-        if p[1]==6:
-            cor2 = f'\033[0;36m{p[1]}\033[m'
-
-        s += '[' + f'{cor}' + '|' + f'{cor2}' + ']'
-    return s
-
+# CRIAR DICIONARIO COM CHAVES REPRESENTANDO OS JOGADORES E OS VALORES A SOMA DE PONTOS 
 def cria_dic_soma(n_jogadores):
     soma = {}
     for i in range(n_jogadores):
         soma[i] = 0
     return soma
 
+# PRINTAR LISTA DE VENCEDORES
+def print_vencedor(vencedores):
+    lista = []
+    for v in vencedores:
+        if v == 0:
+            lista.append('Você')
+        else:
+            lista.append(v+1)
+    return lista
+
+# Dicionario de cores nos numeros que será usado pelas funções de colorir as peças
+cores = {0:'\033[0;90m',
+1:"\033[0;31m",
+2:"\033[0;34m",
+3:"\033[0;32m",
+4:"\033[0;36m",
+5:'\033[0;91m',
+6:"\033[0;33m"
+}
+reset = '\033[m'
+
+# PRINTAR PEÇA COLORIDA
+def print_peca(p):
+    cor1 = cores[p[0]] + f'{p[0]}' + reset
+    cor2 = cores[p[1]] + f'{p[1]}' + reset
+    s = '[' + f'{cor1}' + '|' + f'{cor2}' + ']'
+    return s
+
+# PRINTAR MESA COLORIDA
+def print_mesa(mesa):
+    s = ''
+    for p in mesa:
+        cor1 = cores[p[0]] + f'{p[0]}' + reset
+        cor2 = cores[p[1]] + f'{p[1]}' + reset
+        s += '[' + f'{cor1}' + '|' + f'{cor2}' + ']'
+    return s
+
+# PRINTAR PECAS DO JOGADOR COLORIDAS
+def print_pecas(pecas):
+    s = ''
+    for p in pecas:
+        cor1 = cores[p[0]] + f'{p[0]}' + reset
+        cor2 = cores[p[1]] + f'{p[1]}' + reset
+        s += '[' + f'{cor1}' + '|' + f'{cor2}' + ']' + ' '
+    return s
